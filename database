@@ -1,0 +1,382 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.1.30-community
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema covid
+--
+
+CREATE DATABASE IF NOT EXISTS covid;
+USE covid;
+
+--
+-- Definition of table `tbladmin`
+--
+
+DROP TABLE IF EXISTS `tbladmin`;
+CREATE TABLE `tbladmin` (
+  `adminid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `emailid` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`adminid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbladmin`
+--
+
+/*!40000 ALTER TABLE `tbladmin` DISABLE KEYS */;
+INSERT INTO `tbladmin` (`adminid`,`emailid`,`password`) VALUES 
+ (1,'admin@gmail.com','Admin*121');
+/*!40000 ALTER TABLE `tbladmin` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tblfollower`
+--
+
+DROP TABLE IF EXISTS `tblfollower`;
+CREATE TABLE `tblfollower` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` int(10) unsigned NOT NULL,
+  `followerid` int(10) unsigned NOT NULL,
+  `requestdate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_tblfollower_1` (`userid`),
+  KEY `FK_tblfollower_2` (`followerid`),
+  CONSTRAINT `FK_tblfollower_1` FOREIGN KEY (`userid`) REFERENCES `tbluser` (`userid`),
+  CONSTRAINT `FK_tblfollower_2` FOREIGN KEY (`followerid`) REFERENCES `tbluser` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblfollower`
+--
+
+/*!40000 ALTER TABLE `tblfollower` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblfollower` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tblrealtwitstream`
+--
+
+DROP TABLE IF EXISTS `tblrealtwitstream`;
+CREATE TABLE `tblrealtwitstream` (
+  `twitid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `tweetcontent` varchar(1000) NOT NULL,
+  `createdaccount` int(10) unsigned NOT NULL,
+  `followers` int(10) unsigned NOT NULL,
+  `followings` int(10) unsigned NOT NULL,
+  `userfavorite` int(10) unsigned NOT NULL,
+  `listed` int(10) unsigned NOT NULL,
+  `tweetcount` int(10) unsigned NOT NULL,
+  `retweetcount` int(10) unsigned NOT NULL,
+  `hashtagcount` int(10) unsigned NOT NULL,
+  `mentioncount` int(10) unsigned NOT NULL,
+  `urlcount` int(10) unsigned NOT NULL,
+  `charcount` int(10) unsigned NOT NULL,
+  `digitcount` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`twitid`)
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblrealtwitstream`
+--
+
+/*!40000 ALTER TABLE `tblrealtwitstream` DISABLE KEYS */;
+INSERT INTO `tblrealtwitstream` (`twitid`,`username`,`tweetcontent`,`createdaccount`,`followers`,`followings`,`userfavorite`,`listed`,`tweetcount`,`retweetcount`,`hashtagcount`,`mentioncount`,`urlcount`,`charcount`,`digitcount`) VALUES 
+ (1,'Roads of Mumbai ????','Highly recommended car cushion for back, for those who have back pains and drive for long hours!\n\nYour back will thank you, guaranteed. https://t.co/JoJyXbl48x',2309,109789,985,36649,125,67443,0,0,0,0,159,2),
+ (2,'Mid Day','#MiddayEntertainment |\n\nPriyanka Chopra unveils the first glimpse of their daughter \'MM\', brings her home after 100 days\n\n#PriyankaChopra #NickJonas #MothersDay2022 #MaltiMarie #MM \n\nhttps://t.co/fyDxTrRSLc',4771,686949,154,2821,1065,193781,0,6,0,1,206,7),
+ (3,'Mid Day','#MiddayEntertainment |\n\nRanveer Singh: My Hindi had to sound how theirs would\n\nVia: @MoharBasu \n\n#RanveerSingh #JayeshbhaiJordaar \n\nhttps://t.co/dmth96OfZN',4771,686949,154,2821,1065,193781,0,3,1,1,155,2),
+ (4,'The Economist','It’s that time of year again: corporate annual meeting season. \n\nOn this week’s “Money Talks”, host @alice_fulwood explores why the battle for corporate purpose has shifted to shareholder resolutions https://t.co/Hi2hHnHS9P',5475,26631316,143,153,120762,304886,3,0,1,1,223,2),
+ (5,'TOI Plus','Do we really need $600bn forex reserve earning just 1-2% return? \n\nhttps://t.co/Drf5L5HdKI',3441,438921,367,527,516,98801,0,0,0,1,90,7),
+ (6,'TOI India','Amit Shah in Assam on three-day tour, to interact with BSF at border outpost https://t.co/kmaFpEP8lf',4777,1873895,22,0,3003,306644,1,0,0,1,100,1),
+ (7,'Faye DSouza','RT @yudhanjaya: To Indian journalists being airdropped into Sri Lanka right now:\n1. A lot of us have other things to do besides giving you…',4765,1107699,1253,4041,911,10697,163,0,1,0,139,1),
+ (8,'barkha dutt','RT @oxfordbookstore: Glimpses from today\'s #BookSigning session with @BDUTT award-winning TV journalist, anchor & columnist at Oxford Books…',4843,7233931,3645,93129,10490,147883,3,1,2,0,140,0),
+ (9,'barkha dutt','RT @oxfordbookstore: Glimpses from today\'s #BookSigning session with \n@BDUTT award-winning TV journalist, anchor & columnist at Oxford Book…',4843,7233931,3645,93129,10490,147883,4,1,2,0,140,0),
+ (10,'Mumbai Traffic','RT @Wassup_Mumbai: Slow traffic from IIT Powai towards Jogeshwari. Please check @MumbaiPolice',2422,99359,631,7,189,108383,1,0,2,0,93,0),
+ (11,'9GAG ?? Memeland','Say cheese\n\n?? @ipnot https://t.co/bIV8SGDief',4967,16880280,12,3099,9952,57078,84,0,1,0,45,1),
+ (12,'Mid Day','TLC in a press release\n\nRead more about it on @bombayana\'s #BombayNama in\ntoday\'s #MiddayDigitalTabloid \n\nhttps://t.co/oMPnjqS9PY',4771,686949,154,2821,1065,193781,0,2,1,1,129,1),
+ (13,'TOI Plus','Europe wants cheap Russian oil too, but via India \n\nhttps://t.co/jBFmD0pG3T',3441,438921,367,527,516,98801,2,0,0,1,75,2),
+ (14,'The Economist','Liberal activists focus solely on the gender gap at their peril: women are almost as likely as men to oppose abortion https://t.co/4HqVVbSP7v',5475,26631316,143,153,120762,304886,13,0,0,1,141,2),
+ (15,'Mumbai Traffic','RT @Sarcasm202: Bumper to Bumper traffic at Saki Vihar Road towards Sakinaka Metro station. The car has just moved 500 meters in the last 3…',2422,99359,631,7,189,108383,1,0,1,0,140,7),
+ (16,'barkha dutt','RT @AnshumanSakle: I am finding it difficult to read this book. I don\'t know how you found the courage and energy to write it @BDUTT. Thank…',4843,7233931,3645,93129,10490,147883,2,0,2,0,140,0),
+ (17,'TOI India','Cyclone Asani gathers intensity; alert sounded in Andhra Pradesh, Odisha & West Bengal: Key points https://t.co/NITPTNzJ6M',4777,1873895,22,0,3003,306644,1,0,0,1,122,1),
+ (18,'Mid Day','#MiddaySports |\n\nKnight Riders’ Powerplay problem persists\n\nVia: Shreeram Gokhale\n\n#KKR #IPL2022 \n\nhttps://t.co/comgH3Iwiv',4771,686949,154,2821,1065,193781,0,3,0,1,122,5),
+ (19,'The Economist','Even before the war many countries had been forced to think harder about food. Now the risk is that governments will respond in ways that will make supplies even scarcer and prices even higher in the long run https://t.co/INmYFrbz8B',5475,26631316,143,153,120762,304886,25,0,0,1,232,1),
+ (20,'TOI Plus','Is it right to keep money secrets from your partner? \n\nhttps://t.co/xpv2ZdNlFg',3441,438921,367,527,516,98801,3,0,0,1,78,1),
+ (21,'Mid Day','#MiddayEntertainment |\n\nWhen valour won Akshay Kumar over\n\nVia: @MoharBasu \n\n#AkshayKumar #Prithviraj #PrithvirajTrailer \n\nhttps://t.co/sodV4p7L06',4771,686949,154,2821,1065,193781,18,4,1,1,146,4),
+ (22,'The Economist','In 1971, Paul Neubeurger filed one of the first social issues shareholder resolutions at General Motors’ annual meeting over the company’s support of apartheid in South Africa. Find out why the movement has exploded on “Money Talks” https://t.co/ELcJfrEEs5 https://t.co/orxZyhgv10',5475,26631316,143,153,120762,304886,8,0,0,1,280,7),
+ (23,'Mid Day','Residents of 3 villages who may lose farmland for Line 9 project write to govt about alternative parcel in Gorai\n\n#MiddayNews #MumbaiNews #Mumbai #CarShed \n\nRead more on https://t.co/CFMtkYpTGd https://t.co/GdREKeQ8RJ',4771,686949,154,2821,1065,193781,0,4,0,1,217,3),
+ (24,'Mid Day','OBCs not at a loss as of now\n\nRead more about it on\n@dharmendrajore\'s #RaagDarbari in today\'s #MiddayDigitalTabloid \n\nhttps://t.co/5232q0oM8Q',4771,686949,154,2821,1065,193781,0,2,1,1,141,6),
+ (25,'Atul Khatri','There is a Rana in every Ravana',4784,2731087,452,1314,360,783,4,0,0,0,31,0),
+ (26,'Mid Day','RT @ranjeetnature: Why not use govt land for Metro car shed, ask locals of Mira-Bhayandar villages https://t.co/MiblPfZ1u1 #mumbainews @mid…',4771,686949,154,2821,1065,193781,3,1,1,1,140,2),
+ (27,'TOI Plus','Jeep, Facetime, Cardigan, Ruscism...words wars gave to English \n\nhttps://t.co/0nhaEfoghQ',3441,438921,367,527,516,98801,1,0,0,1,88,1),
+ (28,'Roads of Mumbai ????','Congratulations Mumbai! We did it. https://t.co/BVOJxW6jpB https://t.co/MkBa12H1Iy',2309,109789,985,36649,125,67443,0,0,0,1,82,4),
+ (29,'Roads of Mumbai ????','RT @MNCDFbombay: Painting on speedbreakers helps saves lives! Our #MNCDFflyingSquad member @naresahuja complained about lack of detection/v…',2309,109789,985,36649,125,67443,12,1,2,0,140,0),
+ (30,'The Economist','He worked with some of the greatest pianists in the world. Yet his awe at their art did not alter his feeling that the pianos were his, as much as theirs https://t.co/lKnx1i968a',5475,26631316,143,153,120762,304886,13,0,0,1,177,4),
+ (31,'TOI Mumbai','Western Railway overhead wire snaps, trains paralysed https://t.co/LPO5EAz5Oo',4773,336948,82,33,549,168402,2,0,0,1,77,2),
+ (32,'Mid Day','#MiddaySports |\n\nIPL 2022: Chennai Super Kings thrash Delhi Capitals by 91 runs\n\n#IPL2022 #CSKvDC #ChennaiSuperKings #DelhiCapitals \n\nhttps://t.co/eMlHdml0pg',4771,686949,154,2821,1065,193781,0,5,0,1,157,11),
+ (33,'Mid Day','#MiddayEntertainment |\n\nPratik Gandhi: Yours Emotionally helped me perform this part\n\nVia: @umasagit \n\n#PratikGandhi #ModernLoveMumbai #ModernLoveOnPrime \n\nhttps://t.co/Bh2npj8VZf',4771,686949,154,2821,1065,193781,1,4,1,1,179,2),
+ (34,'The Economist','By militarising the parade and taking control of popular celebrations, Vladimir Putin has turned Victory Day into a state-controlled spectacle https://t.co/tBkiFpLSis',5475,26631316,143,153,120762,304886,22,0,0,1,166,0),
+ (35,'barkha dutt','Thank you Calcutta for a warm, inquisitive, jousting wonderful two days. Got your copy yet of #HumansOfCovid - would love to hear what you think - do share a photo or moment that resonated ?? https://t.co/SXDLgW7Y4X',4843,7233931,3645,93129,10490,147883,8,1,0,0,215,2),
+ (36,'TOI India','India reports 3,207 new Covid-19 cases in last 24 hours, sees dip in number of active cases https://t.co/kzFqFszecZ',4777,1873895,22,0,3003,306644,3,0,0,1,115,8),
+ (37,'Mumbai Traffic','RT @SunilGhate1: #PankheshahGarden renovation of jogging track is going on slowly! Opp Dargah, LBSRD, Ghatkopar-w. Probably, it\'s part of t…',2422,99359,631,7,189,108383,1,1,1,0,140,1),
+ (38,'TOI Mumbai','HPV DNA screening for cervical cancer saves lives https://t.co/QXkl3jZZqb',4773,336948,82,33,549,168402,0,0,0,1,73,1),
+ (39,'TOI Plus','Why Rajiv Gandhi assassination case triggered Centre vs state battle\n\n@TheBaghelS\n\nhttps://t.co/wL3ulkzKOc',3441,438921,367,527,516,98801,2,0,1,1,106,1),
+ (40,'Mid Day','#MiddayNews |\n\nMBVV cops hunt down member of vehicle theft gang after a chase in Nashik\n\nVia: @DiwakarSharmaa \n\n#Nashik #MumbaiNews #CrimeNews \n\nhttps://t.co/wWJ6qeNrly',4771,686949,154,2821,1065,193781,2,4,1,1,168,1),
+ (41,'Mid Day','#MiddayNews |\n\nMumbai: Western Railway train services affected after overhead wire snaps near Borivli station\n\n#MumbaiNews #IndianRailways \n#Borivli \n\nhttps://t.co/z97gY17g4K',4771,686949,154,2821,1065,193781,1,4,0,1,174,5),
+ (42,'The Economist','In the short term, power plants and distributors have little choice but to muddle through. Over the long term, several fixes are possible https://t.co/oIx9SBd8ZU',5475,26631316,143,153,120762,304886,9,0,0,1,161,2),
+ (43,'TOI Mumbai','Mumbai: Rashmi Shukla\'s phone-tap woes mount as babu & juniors depose against her https://t.co/YqgwTo4B9z',4773,336948,82,33,549,168402,1,0,0,1,105,2),
+ (44,'TOI Mumbai','Bhandup STP bid 54% < estimate, BMC to go to South Korea to verify tech https://t.co/PUOhY6bFIm',4773,336948,82,33,549,168402,0,0,0,1,95,3),
+ (45,'Mid Day','#MiddayNews |\n\nMumbai Crime: One more victim of conman cricketer Mrinank Singh surfaces\n\nVia: @journofaizan \n\n#MumbaiNews #CrimeNews #MrinankSingh \n\nhttps://t.co/nD72Y2yukF',4771,686949,154,2821,1065,193781,1,4,1,1,172,3),
+ (46,'TOI Plus','Is #Putin really ill and how can it impact the war?\n\nRead: https://t.co/rrY8mm5YQD https://t.co/OPu4sbwa0l',3441,438921,367,527,516,98801,2,1,0,1,106,4),
+ (47,'The Economist','People are enjoying simple pleasures—including the sight of the Ukrainian city coming back to life  https://t.co/yGJR49WN6g',5475,26631316,143,153,120762,304886,20,0,0,1,123,3),
+ (48,'Mid Day','#MiddayNews |\n\nNIA raids locations linked to Dawood Ibrahim associates in Mumbai\n\n#MumbaiNews #DawoodIbrahim \n\nhttps://t.co/ol76bRawGT',4771,686949,154,2821,1065,193781,1,3,0,1,134,2),
+ (49,'TOI Mumbai','Mumbai: Water cut in Kurla from Tuesday 10am https://t.co/hSOukBV5IQ',4773,336948,82,33,549,168402,1,0,0,1,68,3),
+ (50,'48 Laws Of Power Bot','When playing with people’s emotions you have to be careful.\n\nStudy the enemy beforehand:\n\nSome fish are best left at the bottom of the pond.',1012,168240,8,0,892,1145,34,0,0,0,140,0),
+ (51,'TOI Mumbai','Maharashtra: No recruitment rules yet for higher education joint directors https://t.co/5eYMXEKb8b',4773,336948,82,33,549,168402,0,0,0,1,98,2),
+ (52,'Mid Day','#MiddayNews |\n\nGo easy on roadside meat during summer, caution experts\n\nVia: @vinodkumarmenon \n\n#MumbaiNews #BMC \n\nhttps://t.co/bhQTImOD7X',4771,686949,154,2821,1065,193781,0,3,1,1,138,1),
+ (53,'Western Railway','RT @AshwiniVaishnaw: Thank You ??',2557,537326,35,880,261,74268,315,0,1,0,33,0),
+ (54,'TOI Mumbai','Aaditya Thackeray off to Ayodhya, no politics to his visit: Sanjay Raut https://t.co/QbogDr2zHw',4773,336948,82,33,549,168402,3,0,0,1,95,1),
+ (55,'TOI Mumbai','Maharashtra: Missing teen found dead at Narpad beach https://t.co/IhKN7m5kkj',4773,336948,82,33,549,168402,0,0,0,1,76,2),
+ (56,'The Economist','The costs of controlling the spread of Omicron are becoming apparent. Factory activity has suffered dearly and strains on shipping and logistics are rippling through global supply chains \nhttps://t.co/6kiURtQEYV',5475,26631316,143,153,120762,304886,23,0,0,1,211,1),
+ (57,'TOI Mumbai','Mumbai: No arrests, warning given in FIRs against 2 masjids https://t.co/ySXymnDW0q',4773,336948,82,33,549,168402,1,0,0,1,83,2),
+ (58,'TOI Plus','How India lost its edible oil self-sufficiency, and how to get it back \n\nhttps://t.co/VVOWmkp5R2',3441,438921,367,527,516,98801,0,0,0,1,96,2),
+ (59,'Central Railway','#TodayInHistory\nSuburban services were extended up to Vashi on #harbourline on this day (9.5.1992). https://t.co/sbouWOxyr7',2803,457260,17,7071,262,33904,26,2,0,0,123,7),
+ (60,'Mid Day','#MiddayNews |\n\nWoman found hanging in bathroom of long-distance train in Dahanu\n\nVia: @Khanmidday \n\n#Dahanu #MumbaiNews \n\nhttps://t.co/OxseO1ijzI',4771,686949,154,2821,1065,193781,0,3,1,1,145,1),
+ (61,'The Economist','If you think the genre started with Elvis or the Beatles, think again https://t.co/RckDbLS343',5475,26631316,143,153,120762,304886,19,0,0,1,93,3),
+ (62,'TOI Mumbai','NIA raids locations linked to Dawood associates, hawala operators in Mumbai https://t.co/rHzTmN1vfT',4773,336948,82,33,549,168402,3,0,0,1,99,1),
+ (63,'TOI Mumbai','Around 10 lakh cases settled in Lok Adalats across Maharashtra https://t.co/KYfg7ytCUP',4773,336948,82,33,549,168402,2,0,0,1,86,3),
+ (64,'TOI India','PM Modi pays tributes to Rabindranath Tagore, Gopal Krishna Gokhale, Maharana Pratap on their birth anniversary https://t.co/waU5qjJN1D',4777,1873895,22,0,3003,306644,0,0,0,1,135,2),
+ (65,'Mid Day','#MiddayNews |\n\nMumbai: Very soon, devotees can listen to azaan from their homes\n\nVia: @rajtoday \n\n#MumbaiNews #Loudspeakers \n\nhttps://t.co/JcmX51jzP8',4771,686949,154,2821,1065,193781,0,3,1,1,149,3),
+ (66,'TOI Plus','#Opinion: Is Uniform Civil Code at cost of India\'s unity desirable? \n\nhttps://t.co/qzxqakGNv4',3441,438921,367,527,516,98801,0,1,0,1,93,1),
+ (67,'Mumbai Traffic','RT @nikhilc_23: Slow moving traffic towards Mumbai on EEH near Airoli Signal.\nPlan your commute accordingly.\n#mumbaitraffic\n@mumbaitraffic…',2422,99359,631,7,189,108383,2,1,2,0,139,2),
+ (68,'The Economist','Chinese internet are swapping advice and archiving stories of successful emigration to various countries  https://t.co/FpvFnRGUXW',5475,26631316,143,153,120762,304886,25,0,0,1,129,0),
+ (69,'TOI Mumbai','Mumbai: ‘NOC to Metro near Juhu airport addresses safety compliances’ https://t.co/OWZ6D97pKC',4773,336948,82,33,549,168402,1,0,0,1,93,3),
+ (70,'Mid Day','#MiddayNews |\n\nMumbai sees Covid-19 cases in three digits again at 123\n\n#COVID19 #COVIDUpdates #CoronaVirusUpdates \n\nhttps://t.co/7MrNmMJLju',4771,686949,154,2821,1065,193781,0,4,0,1,140,8),
+ (71,'Mumbai Traffic','RT @trendsfan2: Traffic shouldn\'t eat into dinner plans. And everyone should reach home from work just in time for a Rooftop sundowner five…',2422,99359,631,7,189,108383,2,0,1,0,140,1),
+ (72,'Kunal Kamra','*Dank Max*\nWho did this?\n?????? https://t.co/hm1Sp6tIYu',3057,2290101,10,3,996,5410,565,0,0,0,55,2),
+ (73,'TOI Plus','When freedom of speech comes with freedom to lie and abuse... \n\n@desaisantosh\n\nhttps://t.co/U56PImwvGa',3441,438921,367,527,516,98801,0,0,1,1,102,2),
+ (74,'Mid Day','After the food hub is dismantled, minister promises probe and action against officials who aided land grabbers\n\n#Borivli #MumbaiNews \n\nRead More On #MiddayDigitalTabloid \n\nhttps://t.co/DoPCl6niFJ https://t.co/63GNaYHPb3',4771,686949,154,2821,1065,193781,0,3,0,1,219,4),
+ (75,'The Economist','This type of aerial surveillance may yet prove to have legitimate policing uses. But if the price of liberty is eternal vigilance, then vigilance against the misuse of this sort of vigilance needs to be eternal https://t.co/8RRPuk0qBW',5475,26631316,143,153,120762,304886,18,0,0,1,234,2),
+ (76,'TOI Mumbai','Several Hawala operators & drug peddlers were associated with Dawood & NIA had registered in this regard in February. Raids began today: National Investigation Agency (NIA)',4773,336948,82,33,549,168402,2,0,0,0,172,0),
+ (77,'TOI Mumbai','NIA raids begin at several locations on the premises of associates of underworld don Dawood Ibrahim. Raids are being done in Nagpada, Goregaon, Borivali, Santacruz, Mumbra, Bhendi Bazar, and other places: National Investigation Agency (NIA)',4773,336948,82,33,549,168402,2,0,0,0,240,0),
+ (78,'TOI Mumbai','National Investigation Agency (NIA) conducts raids at more than one dozen locations in Mumbai against Pakistan-based gangster Dawood Ibrahim\'s associates and a few hawala operators https://t.co/1ooV2P4vxg',4773,336948,82,33,549,168402,3,0,0,0,204,3),
+ (79,'TOI Plus','Why India must make its satellite navigation system world class \n \n@adityascripts\n\nhttps://t.co/1yvnqC8JJn',3441,438921,367,527,516,98801,2,0,1,1,106,2),
+ (80,'Mid Day','#MiddayNews |\n\nNow, BMC moves High Court over Mogra pumping station\n\nVia: @PrajaktaKasale \n\n#BMC #HighCourt \n\nhttps://t.co/jAjVHpSoNp',4771,686949,154,2821,1065,193781,0,3,1,1,133,0),
+ (81,'The Economist','China is strikingly indifferent to Ukraine’s suffering, but really wants to see the containment of Russia fail  https://t.co/Mrm0IVg9zt',5475,26631316,143,153,120762,304886,32,0,0,1,135,2),
+ (82,'TOI Mumbai','Maharashtra: Central Railway platform tickets at Rs 50 from today https://t.co/e7Zpq99Nyj',4773,336948,82,33,549,168402,4,0,0,1,89,5),
+ (83,'TOI Mumbai','Man collects haftas from hawkers in Mumbai, held https://t.co/cYMHrH6XZy',4773,336948,82,33,549,168402,0,0,0,1,72,1),
+ (84,'TOI Mumbai','Mumbai: Central govt’s push to solar energy empowers more to make the switch https://t.co/9LJjUOQnV6',4773,336948,82,33,549,168402,1,0,0,1,100,2),
+ (85,'Mid Day','#MiddayNews |\n\nMumbai: Central Railway hikes platform ticket fare to Rs 50\n\nVia: @rajtoday \n\n#MumbaiNews #CentralRailway \n\nhttps://t.co/Dur7kkavm9',4771,686949,154,2821,1065,193781,0,3,1,1,146,4),
+ (86,'TOI Plus','#WHO numbers are debatable, but healthcare needs fixing\n@thePHFI\n\nhttps://t.co/rUrOE4T7t7',3441,438921,367,527,516,98801,2,1,1,1,89,3),
+ (87,'The Economist','America and its allies call their united actions over Ukraine proof that the West is not finished just yet. China sees a chance to prove them wrong  https://t.co/8iAGfLiC1I',5475,26631316,143,153,120762,304886,15,0,0,1,172,2),
+ (88,'Mid Day','#MiddaySports |\n\nOpener Conway, #MSD power #CSK to 208-6 against #DC\n\nVia: SS Ramaswamy \n\n#CSKvsDC #DCvsCSK #DCvCSK\n https://t.co/LggxC6xhKI',4771,686949,154,2821,1065,193781,0,7,0,1,140,5),
+ (89,'Mid Day','#MiddayNews |\n\nDelhi: FIR lodged against Rajasthan minister\'s son for raping woman\n\n#Delhi #Rajasthan #CrimeNews \n\nhttps://t.co/IooQm0tnPo',4771,686949,154,2821,1065,193781,0,4,0,1,138,1),
+ (90,'Narendra Modi','Tributes to the great Gopal Krishna Gokhale on his birth anniversary. His contribution to our freedom struggle is unforgettable. His unwavering commitment to democratic principles and social empowerment keeps motivating us.',4866,78625044,2431,0,28623,32744,1884,0,0,0,223,0),
+ (91,'Narendra Modi','I bow to Gurudev Tagore on his Jayanti. In thought and action, he continues to inspire millions of people. He taught us to be proud of our nation, culture and ethos. He emphasised on education, learning and social empowerment. We are committed to fulfilling his vision for India. https://t.co/O4iuz10iP4',4866,78625044,2431,0,28623,32744,1670,0,0,0,303,4),
+ (92,'Mid Day','#MiddayNews |\n\nFinally, illegal Borivli chowpatty on govt land pulled down\n\nVia: @ShirishVaktania \n\n#Borivli #MumbaiNews \n\nhttps://t.co/Sk6tzBtVmw',4771,686949,154,2821,1065,193781,0,3,1,1,146,1),
+ (93,'Mumbai Traffic','RT @mallu_andolan: India should use paper ballots instead of EVMs to eliminate EVM manipulation @ECISVEEP @openDemocracy @suchetadalal @anj…',2422,99359,631,7,189,108383,3,0,4,0,140,0),
+ (94,'Western Railway','#WRUpdates\n\nTechnical problem in over head Wire between Dahisar & Borivali has been put right at 7.23 hrs.\n\n@RailMinIndia @drmbct',2557,537326,35,880,261,74268,21,1,2,0,129,3),
+ (95,'The Economist','The animals are riddled with the disease—but help may be coming in the form of vaccines https://t.co/6DeS1p09bb',5475,26631316,143,153,120762,304886,15,0,0,1,111,4),
+ (96,'Mumbai Traffic','RT @HungryBawarchi: Today it took me 1 hour 32 mins to reach bandra from andheri yari road\n\nEverywhere you see in Mumbai, it\'s dug up\nEvery…',2422,99359,631,7,189,108383,3,0,1,0,140,3),
+ (97,'TOI Plus','.@switchshot explains how the heat hit a bumper crop prediction and @agulati115 explains the bigger problems facing India\'s wheat farming  \n\nhttps://t.co/OQxgCnZuO8',3441,438921,367,527,516,98801,0,0,2,1,164,4),
+ (98,'TOI Mumbai','200+ Covid cases in Maharashtra for 4th day in a row https://t.co/Cm7aC2uegg',4773,336948,82,33,549,168402,2,0,0,1,76,6),
+ (99,'The Economist','Yoon Suk-yeol’s Herculean ambitions would be challenging for the most experienced and popular of leaders. He is neither https://t.co/FlV0VCkFD4',5475,26631316,143,153,120762,304886,11,0,0,1,143,2),
+ (100,'Western Railway','Due to Overhead Electric Wire breakdown between Dahisar - Borivali @ 5.50 hrs all UP through trains are being diverted through UP local line. UP fast locals delayed by 15 min.\n\nRestoration work in progress & will be completed soon. Inconvenience caused is deeply regretted\n@drmbct',2557,537326,35,880,261,74268,25,0,1,0,280,5),
+ (101,'Mumbai Traffic','RT @sandeepmore1983: At Ghatkopar West Railway Station, the rickshaw pullers have to suffer unnecessarily at night.  Action should be taken…',2422,99359,631,7,189,108383,1,0,1,0,140,4),
+ (102,'TOI Mumbai','Maharashtra | Due to OHE (Overhead Equipment) breakdown between Dahisar and Borivali station, all local trains (UP) are running late by 10 to 15 minutes: Western Railway https://t.co/2fNMfNmeEc',4773,336948,82,33,549,168402,59,0,0,0,193,5),
+ (103,'The Economist','Victory would be the culmination of a decades-long effort to rehabilitate the family name, long associated with his late father’s brutality and corruption, and the lavish lifestyle enjoyed by Imelda Marcos https://t.co/leTSnisDoK',5475,26631316,143,153,120762,304886,10,0,0,1,229,0),
+ (104,'Mumbai Traffic','RT @LittleTiwarior: .@MumbaiPolice Mahalakshmi Signal (at the station) towards worli/lower parel doesn\'t turn green. Have been noticing thi…',2422,99359,631,7,189,108383,3,0,2,0,140,0),
+ (105,'Western Railway','RT @drmbct: Due to OHE breakdown between DAHISAR -BORIVALI station, all up through local trains are running late by 10 to 15 minutes.',2557,537326,35,880,261,74268,25,0,1,0,133,4),
+ (106,'Central Railway','RT @RailMinIndia: Take a look at this week\'s Major Highlights of Indian Railways ! \n\n#RailBuzz https://t.co/mkc1zAyF4z',2803,457260,17,7071,262,33904,81,1,1,0,118,2),
+ (107,'Central Railway','RT @RailMinIndia: Working Towards Providing a Safer and Comfortable travelling Experience!\n\nIndian Railways has produced 355 LHB Coaches in…',2803,457260,17,7071,262,33904,107,0,1,0,140,3),
+ (108,'Central Railway','RT @RailMinIndia: Digital Locker installed to enhance safety.\n\nIn a bid to redevelop and transform Stations, Jabalpur Railway Station, WCR…',2803,457260,17,7071,262,33904,101,0,1,0,139,0),
+ (109,'The Economist','Tighter financial conditions are the natural consequence of raising rates, and the adjustment has some way to go yet https://t.co/O3OvD0nQV7',5475,26631316,143,153,120762,304886,15,0,0,1,140,3),
+ (110,'TOI India','Stalker behind fire that killed 7 held in MP after a 10-km chase https://t.co/vzpz01BfIH',4777,1873895,22,0,3003,306644,0,0,0,1,88,5),
+ (111,'TOI India','Another man falls prey to agents\' blackmail after loan-app enquiry https://t.co/cd5uKt3EKL',4777,1873895,22,0,3003,306644,1,0,0,1,90,2),
+ (112,'9GAG ?? Memeland','What do golden retrievers retrieve? My heart? https://t.co/pbVAcfwXK9',4967,16880280,12,3099,9952,57078,369,0,0,0,69,1),
+ (113,'TOI Mumbai','Maharashtra: 20-year-old woman found dead inside train toilet https://t.co/ZciONO9uYV',4773,336948,82,33,549,168402,2,0,0,1,85,3),
+ (114,'The Economist','Shipping has become one the least visible engines of the modern economy. It can also be among the shadiest, argue Matthew Campbell and Kit Chellel in their new book, “Dead in the Water” https://t.co/ei53O3BvVR',5475,26631316,143,153,120762,304886,8,0,0,1,209,3),
+ (115,'The Economist','The idea that an introductory phrase must always apply to the subject of the clause that follows is a useful rule, but not a cardinal one https://t.co/jVxe2OtYpB',5475,26631316,143,153,120762,304886,11,0,0,1,161,1),
+ (116,'The Economist','The humiliation does not stop in the meeting room. Offenders may be subjected to public shaming by having their names displayed on a morality notice board for all to see  https://t.co/Kygh8gfvJq',5475,26631316,143,153,120762,304886,18,0,0,1,194,1),
+ (117,'The Economist','Evan McMullin’s politics are a reminder that Democrats and moderate Republicans, a dwindling but extant species, could govern together perfectly well if their fanatical colleagues would only allow it https://t.co/ILnNjOwLd1',5475,26631316,143,153,120762,304886,24,0,0,1,223,1),
+ (118,'TOI India','Govt may extend PM housing scheme in urban areas for 2 more years https://t.co/9Uhuek5vdA',4777,1873895,22,0,3003,306644,0,0,0,1,89,3),
+ (119,'The Economist','“The United States gets more unstable the more its fundamental liberties are delegated to the states. Then the question is, what are your fundamental liberties?” @DavidAFrench considers what will happen if Roe v Wade is overturned, on “Checks and Balance” https://t.co/2jUkFV2KmG',5475,26631316,143,153,120762,304886,24,0,1,1,279,2),
+ (120,'48 Laws Of Power Bot','If there is no gap — if they are impossibly strong — you have nothing to gain and everything to lose by provoking them.\n\nChoose carefully whom you bait, and never stir up the sharks.',1012,168240,8,0,892,1145,25,0,0,0,182,0),
+ (121,'The Economist','AMLO has long criticised Mexico’s electoral body, but surveys show that Mexicans trust it more than any other institution, except for the armed forces https://t.co/4KBQO7Ijmp',5475,26631316,143,153,120762,304886,13,0,0,1,174,2),
+ (122,'TOI Mumbai','30 years on, Bombay HC acquits man convicted for murder https://t.co/PRc5RZx9Wj',4773,336948,82,33,549,168402,1,0,0,1,79,4),
+ (123,'TOI Mumbai','Blackmail by loan app agents rising in Mumbai https://t.co/EcgWDHJy00',4773,336948,82,33,549,168402,8,0,0,1,69,2),
+ (124,'The Economist','Some of the richest Russian clients will pay more than double the £500-per-hour going rate for top solicitors https://t.co/1RSiebzDSY',5475,26631316,143,153,120762,304886,12,0,0,1,133,4),
+ (125,'TOI Mumbai','Maharashtra: 19 cops hurt as Boisar steel factory workers resort to rioting, vandalism https://t.co/XtjpcOeiWE',4773,336948,82,33,549,168402,3,0,0,1,110,2),
+ (126,'TOI Mumbai','Ranas target CM Uddhav Thackeray; Maharashtra govt to move court to cancel couple’s bail https://t.co/g2Wg0psyqg',4773,336948,82,33,549,168402,3,0,0,1,112,2),
+ (127,'The Economist','“The Good Soldier Svejk”, published between 1921 and 1923, is a send-up of swaggering authority https://t.co/g3SlAjWQwJ',5475,26631316,143,153,120762,304886,17,0,0,1,119,9),
+ (128,'The Economist','We built a statistical model to find what places with similar price-growth rates have in common https://t.co/zIvF25P2Kk',5475,26631316,143,153,120762,304886,11,0,0,1,119,3),
+ (129,'The Economist','Wearable health and fitness trackers can change the way people try to stay healthy and alleviate illness, the way their doctors care for them, and the way population­-level health interventions are deployed https://t.co/4Hi5L9ly5h',5475,26631316,143,153,120762,304886,18,0,0,1,230,4),
+ (130,'The Economist','Controversial new rules have been put in place by the Republican-controlled Georgia legislature. Opponents say the tactics amount to voter suppression https://t.co/hYImYiIt66',5475,26631316,143,153,120762,304886,20,0,0,1,174,2),
+ (131,'The Economist','In Ghana, generating power has proved much easier than distributing it. So, too, in several east African countries, including Uganda, where installed capacity is nearly double peak demand https://t.co/k9fd5mocNi',5475,26631316,143,153,120762,304886,24,0,0,1,211,2),
+ (132,'The Economist','The most reliable backers of abortion rights are the 30% of Americans with no religious affiliation https://t.co/n1ad0ayRxC',5475,26631316,143,153,120762,304886,66,0,0,1,123,4),
+ (133,'The Economist','How concerned should America and its allies be?  https://t.co/UtpWN1OkiL',5475,26631316,143,153,120762,304886,22,0,0,1,72,1),
+ (134,'The Economist','Rather than play “global whack-a-mole”, as an American expert puts it, Western countries should treat China’s challenge like a game of chess https://t.co/xMk3uVgUhc',5475,26631316,143,153,120762,304886,14,0,0,1,164,1),
+ (135,'9GAG ?? Memeland','Daydreaming with you??\n\n??? @kesanitw_en https://t.co/HYKwiDhkOT',4967,16880280,12,3099,9952,57078,744,0,1,0,64,0),
+ (136,'The Economist','The reputation of America’s Supreme Court does not seem so resilient these days. If politi­cians and voters begin to reject the court’s authority as the ?nal arbiter of the law, chaos beckons \nhttps://t.co/yY62yGNWUR',5475,26631316,143,153,120762,304886,18,0,0,1,216,2),
+ (137,'The Economist','“I think you\'ll see an acceleration...in terms of the role of shareholders” on ESG issues, @NYSComptroller Thomas DiNapoli tells @alice_fulwood on this week’s “Money Talks” podcast https://t.co/bRuO4TpQEb',5475,26631316,143,153,120762,304886,2,0,2,1,204,1),
+ (138,'TOI India','Navneet dares Uddhav to poll duel; Ranas bail to be contested https://t.co/BBqwfec6cZ',4777,1873895,22,0,3003,306644,0,0,0,1,85,1),
+ (139,'TOI India','Open 22 closed doors of Taj to check for idols: Petition in HC https://t.co/GA7wxrBRgC',4777,1873895,22,0,3003,306644,0,0,0,1,86,3),
+ (140,'TOI India','30 years on, HC acquits lifer convicted for Maha murder https://t.co/IA7qH2xBlt',4777,1873895,22,0,3003,306644,0,0,0,1,79,4),
+ (141,'TOI India','Health checks gone, 16 deaths in 6 days of Char Dham yatra https://t.co/0kmH6BEVXS',4777,1873895,22,0,3003,306644,0,0,0,1,82,5),
+ (142,'TOI India','Outfit backing petitioners pulls out of Gyanvapi case https://t.co/3RCdNMkfXI',4777,1873895,22,0,3003,306644,0,0,0,1,77,1),
+ (143,'TOI India','Village bans customs, gives widows a second shot at life https://t.co/2f3035QZ0W',4777,1873895,22,0,3003,306644,0,0,0,1,80,6),
+ (144,'TOI India','Rakhigarhi dig gives evidence of a planned Harappan-era city https://t.co/jZJzmco79L',4777,1873895,22,0,3003,306644,1,0,0,1,84,2),
+ (145,'Mid Day','#WATCH NOW |\n\nRaveena Tandon On How To Raise Gen-Z Kids\n\nhttps://t.co/4DRkFi1chu',4771,686949,154,2821,1065,193781,0,1,0,1,80,2),
+ (146,'TOI India','Old boys add new chapters to their govt-run alma maters https://t.co/gelit70ZP0',4777,1873895,22,0,3003,306644,0,0,0,1,79,3),
+ (147,'TOI India','Airline refuses to let boy with special needs board https://t.co/xPbrOKYbhz',4777,1873895,22,0,3003,306644,2,0,0,1,75,0),
+ (148,'TOI India','Despite rise in cases, weekly Covid deaths at lowest in 26 months https://t.co/q1zigXEtoj',4777,1873895,22,0,3003,306644,1,0,0,1,89,3),
+ (149,'The Economist','Some thought, incorrectly, that the Supreme Court had settled the issue when it decided Roe v Wade in 1973. It’s equally unlikely that the issue will be settled now https://t.co/dvgnKYes8u',5475,26631316,143,153,120762,304886,8,0,0,1,188,5),
+ (150,'The Economist','The political upheaval that drives Latin Americans to Miami shows few signs of abating https://t.co/Yy2dVOh1fb',5475,26631316,143,153,120762,304886,8,0,0,1,110,2),
+ (151,'The Economist','When one of the Black Sea countries is at war, Turkey has the right to prevent warships from gaining access https://t.co/T4AoheYJnK',5475,26631316,143,153,120762,304886,61,0,0,1,131,1),
+ (152,'TOI India','Genuine grievance, but can’t order govt for J&K migrants’ seats: Panel https://t.co/ommRTAZyZj',4777,1873895,22,0,3003,306644,0,0,0,1,94,0),
+ (153,'The Economist','Meta has lost 35% of its market value this year, including a plunge of $232bn in February, the biggest one-day drop in stockmarket history https://t.co/bapyTX1VjV',5475,26631316,143,153,120762,304886,38,0,0,1,162,6),
+ (154,'The Economist','If the city’s crime surge continues, residents may become more receptive to Susan Hutson’s critics, who believe a gentler approach to inmates will only embolden criminals https://t.co/jrGQ6wurQC',5475,26631316,143,153,120762,304886,8,0,0,1,194,1),
+ (155,'TOI India','Gujarat link comes to fore in latest US entry bid https://t.co/mYj58txiCe',4777,1873895,22,0,3003,306644,2,0,0,1,73,2),
+ (156,'The Economist','It is not just Ukraine that needs Javelins and other anti-tank weapons. European allies are re-arming, too \nhttps://t.co/vrxrirVRLx',5475,26631316,143,153,120762,304886,19,0,0,1,131,0),
+ (157,'48 Laws Of Power Bot','Finally there are times when a well-timed burst of anger can do you good, but your anger must be manufactured and under your control.\n\nThen you can determine exactly how and on whom it will fall.',1012,168240,8,0,892,1145,37,0,0,0,195,0),
+ (158,'TOI India','Cyclone Asani likely to spare Odisha, Bengal https://t.co/MhmPmaOLbu',4777,1873895,22,0,3003,306644,2,0,0,1,68,0),
+ (159,'TOI India','No ‘grand alliance’ for 2024, only tie-up with 130 crore Indians: Arvind Kejriwal https://t.co/LK1gvk3zx0',4777,1873895,22,0,3003,306644,2,0,0,1,105,10),
+ (160,'The Economist','Making people stick to healthy behaviours is probably the biggest challenge in public health. That makes innovations which boost compliance particularly exciting https://t.co/rsI7qLpI8p',5475,26631316,143,153,120762,304886,15,0,0,1,185,2),
+ (161,'TOI India','J&K deploys trucks for easy migration of nomadic tribes https://t.co/Mnm5QPUtTO',4777,1873895,22,0,3003,306644,1,0,0,1,79,1),
+ (162,'TOI India','Pak LeT commander among 2 terrorists killed in J&K shootout https://t.co/oQmTB596U4',4777,1873895,22,0,3003,306644,1,0,0,1,83,5),
+ (163,'Mid Day','#WATCH NOW |\n\nSalman Khan Reveals His Similarity With Anand Dighe At \'Dharmaveer\' Trailer Launch\n\nhttps://t.co/3RBwFdYMbx',4771,686949,154,2821,1065,193781,0,1,0,1,121,1),
+ (164,'TOI India','Amit Shah: PM Modi template for what it means to be a national leader https://t.co/9RvuTmD2Rl',4777,1873895,22,0,3003,306644,3,0,0,1,93,2),
+ (165,'The Economist','How might a Macron presidency 2.0 listen more and dictate less? https://t.co/pf1r1RLLBq',5475,26631316,143,153,120762,304886,15,0,0,1,87,4),
+ (166,'Roads of Mumbai ????','Stadiums are not allowed at full capacity in Maharashtra for @IPL due to COVID precautionary measures! \n\nMeanwhile ?? ?? \nLogic RIP ??\nhttps://t.co/s1HWOtzWOz',2309,109789,985,36649,125,67443,15,0,1,0,158,1),
+ (167,'The Economist','Removing the videos—and potential income—of up-and-coming drill artists could actually move them towards crime, argues one music-industry insider https://t.co/efFyUxjJMp',5475,26631316,143,153,120762,304886,7,0,0,1,169,0),
+ (168,'9GAG ?? Memeland','George Quackington\n\n?? e36robert_ | IG https://t.co/Nbv0dwOn3u',4967,16880280,12,3099,9952,57078,113,0,0,0,62,4),
+ (169,'The Economist','Whatever the problem, the solution always seems to be building fewer houses https://t.co/rSv2fE6xIU',5475,26631316,143,153,120762,304886,7,0,0,1,99,2),
+ (170,'The Economist','The Shanghai Composite Index is down by about 7% in a month. Investors have dumped yuan-denominated securities at a record pace \n\nhttps://t.co/hXO4rXyaxq',5475,26631316,143,153,120762,304886,7,0,0,1,153,2),
+ (171,'The Economist','Disappointment stems from an equally huge misunderstanding of how economic progress happens \nhttps://t.co/6a3fRCYvRt',5475,26631316,143,153,120762,304886,4,0,0,1,116,2),
+ (172,'TOI India','Khalistan flags found tied on HP House gate, probe begins https://t.co/5u6jvtqDcI',4777,1873895,22,0,3003,306644,1,0,0,1,81,2),
+ (173,'The Economist','Women in the Middle East are still largely locked out of workforces, despite having better school grades https://t.co/LijQDEWSFm',5475,26631316,143,153,120762,304886,17,0,0,1,128,0),
+ (174,'The Economist','“Ukraine will win this war and defend its independence but Europe will be safe only when Russia becomes a truly free and peaceful country,” writes @sguriev in a guest commentary for The Economist https://t.co/SZW140WOcT',5475,26631316,143,153,120762,304886,25,0,1,1,219,3),
+ (175,'The Economist','About 80% of the burden of disease in America is caused by lifestyle factors. Digital health care can deal with many of these problems https://t.co/a05Kb7YCLu',5475,26631316,143,153,120762,304886,10,0,0,1,158,5),
+ (176,'The Economist','Trade with Russia was the first victim. Most such links are probably severed or good, but some countries in the region see that as a price worth paying  https://t.co/xWJIeANaXL',5475,26631316,143,153,120762,304886,17,0,0,1,176,0),
+ (177,'The Economist','“There were constant attacks on our journalists. The government was always trying to shut us down or have us declared foreign agents. We had survived it all,” recalls @mirrorsbreath \nhttps://t.co/9SKWoKJml2',5475,26631316,143,153,120762,304886,17,0,1,1,206,2),
+ (178,'TOI India','Stop dilution of RERA being ‘Custodian’ of law, advisory council to housing ministry https://t.co/mt7xlQnWpC',4777,1873895,22,0,3003,306644,0,0,0,1,108,1),
+ (179,'The Economist','Most modern autocrats pay lip service to the idea of a free press but choose increasingly subtle weapons with which to attack it https://t.co/Nd19lVXjS2',5475,26631316,143,153,120762,304886,27,0,0,1,152,3),
+ (180,'The Economist','As Russia continues to wage war in Ukraine, this year’s parade in Red Square will be about a third smaller than usual https://t.co/sjBq96g60q',5475,26631316,143,153,120762,304886,13,0,0,1,141,4),
+ (181,'Vir Das','Thank you Mumbai ?? #WantedTour https://t.co/SBwiAYUe7l',4486,7850806,161,2305,1354,30525,32,1,0,0,55,1),
+ (182,'TOI Plus','You may not be fit to drive, and you don\'t know.  A doctor explains  \n\nhttps://t.co/AvfYAvKqwE',3441,438921,367,527,516,98801,2,0,0,1,94,0),
+ (183,'Mid Day','#WATCH NOW |\n\nLock Upp Winner Munawar Faruqui On What He Won & Lost In The Reality Show\n\nhttps://t.co/0sEAs6f6SN',4771,686949,154,2821,1065,193781,2,1,0,1,112,3),
+ (184,'The Economist','“Real-time” measures of Russian economic activity are largely holding up \nhttps://t.co/BfYdAGRIst',5475,26631316,143,153,120762,304886,7,0,0,1,97,0),
+ (185,'The Economist','Sleaze, waiting lists and an unpopular prime minister give politics a retro feel https://t.co/Vfwge4SXml',5475,26631316,143,153,120762,304886,6,0,0,1,104,1),
+ (186,'Western Railway','For the convenience & benefit of passengers, WR has resumed linen services in Train No. 12907 BDTS - H.Nizamuddin Sampark Kranti Exp from today.\n@RailMinIndia\n@drmbct https://t.co/OOwMvBImrg',2557,537326,35,880,261,74268,13,0,2,0,190,5),
+ (187,'9GAG ?? Memeland','Hooman a little help pls https://t.co/s0OM38z7TR',4967,16880280,12,3099,9952,57078,671,0,0,0,48,4),
+ (188,'The Economist','Once listed, Life Insurance Corporation will have a market valuation of around $80bn, making it the fifth-most-valuable life insurer in the world \n\nhttps://t.co/kPT49XraVO',5475,26631316,143,153,120762,304886,8,0,0,1,171,4);
+/*!40000 ALTER TABLE `tblrealtwitstream` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbltweet`
+--
+
+DROP TABLE IF EXISTS `tbltweet`;
+CREATE TABLE `tbltweet` (
+  `tweetid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `message` varchar(500) DEFAULT NULL,
+  `uploadimg` longblob,
+  `uploadname` varchar(45) DEFAULT NULL,
+  `datetime` datetime DEFAULT NULL,
+  `userid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`tweetid`),
+  KEY `FK_tbltweet_1` (`userid`),
+  CONSTRAINT `FK_tbltweet_1` FOREIGN KEY (`userid`) REFERENCES `tbluser` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbltweet`
+--
+
+/*!40000 ALTER TABLE `tbltweet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbltweet` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbluser`
+--
+
+DROP TABLE IF EXISTS `tbluser`;
+CREATE TABLE `tbluser` (
+  `userid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `emailid` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `dob` datetime NOT NULL,
+  `gender` varchar(45) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `contact` varchar(45) NOT NULL,
+  `profilepic` longblob,
+  `profilename` varchar(45) DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbluser`
+--
+
+/*!40000 ALTER TABLE `tbluser` DISABLE KEYS */;
+INSERT INTO `tbluser` (`userid`,`firstname`,`lastname`,`emailid`,`password`,`dob`,`gender`,`address`,`contact`,`profilepic`,`profilename`,`status`) VALUES 
+ (1,'Preet','Porwal','preet.porwal@somaiya.edu','Preet#1234','2000-03-20 00:00:00','Male','Mumbai','9920945488','','','Active'),
+ (2,'Kshitij','Prabhu','kshitij.prabhu@somaiya.edu','Kshitij#1234','2000-07-28 00:00:00','Male','Mumbai','9920431918','','','Active'),
+ (3,'Rajiv','Bane','rajiv.bane@somaiya.edu','Rajiv#1234','2000-04-04 00:00:00','Male','Mulund','9768439281','','','Active'),
+ (4,'Srishti','Shah','srishtishah12@gmail.com','Srishti#1234','1999-12-14 00:00:00','Female','Gujarat','9923411762','','','Active'),
+ (5,'Viraj','Mehta','viraj.mehta@somaiya.edu','Viraj#1234','2000-06-02 00:00:00','Male','Mulund','9584749309','','','Active'),
+ (6,'Manav','Malavia','manav.malavia@somaiya.edu','Manav#1234','2000-03-18 00:00:00','Male','Mahalaxmi','9867490303','','','Active'),
+ (7,'Mansi','Vora','mansi.vora@somaiya.edu','Mansi#1234','2000-04-09 00:00:00','Female','Malad','9204938292','','','Active');
+/*!40000 ALTER TABLE `tbluser` ENABLE KEYS */;
+
+
+--
+-- Definition of table `userlogin`
+--
+
+DROP TABLE IF EXISTS `userlogin`;
+CREATE TABLE `userlogin` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(45) NOT NULL,
+  `otp` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userlogin`
+--
+
+/*!40000 ALTER TABLE `userlogin` DISABLE KEYS */;
+/*!40000 ALTER TABLE `userlogin` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
